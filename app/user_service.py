@@ -1,4 +1,4 @@
-from app.exceptions import UserNotFoundError
+from app.api_exceptions import NotFoundException
 
 
 USERS = {
@@ -10,10 +10,10 @@ class UserService():
     async def get_user_by_id(self, user_id: int) -> dict:
         user = USERS.get(user_id)
         if not user:
-            raise UserNotFoundError()
+            raise NotFoundException(detail=f"User with Id '{user_id}' not found")
         return user
 
 
-# Функция-фабрика для Dependency Injection
+# Fabrice function for dependency injection
 def get_user_service() -> UserService:
     return UserService()
