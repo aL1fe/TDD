@@ -1,19 +1,16 @@
-from app.api_exceptions import NotFoundException
+from app.user_repo import UserRepo
 
 
-USERS = {
-    1: {"id": 1, "name": "Alice"}
-}
+class UserService:
+    def __init__(self, user_repo: UserRepo):
+        self.user_repo = user_repo
 
 
-class UserService():
     async def get_user_by_id(self, user_id: int) -> dict:
-        user = USERS.get(user_id)
-        if not user:
-            raise NotFoundException(detail=f"User with Id '{user_id}' not found")
+        user = await self.user_repo.get_user_by_id(user_id)
         return user
 
 
 # Fabrice function for dependency injection
 def get_user_service() -> UserService:
-    return UserService()
+    return UserService(UserRepo())
