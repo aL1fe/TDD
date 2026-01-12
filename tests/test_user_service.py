@@ -12,9 +12,9 @@ async def test_get_user_by_id_success():
     repo.get_user_by_id.return_value = {"id": user_id, "name": "Alice"}
 
     user_service = UserService(repo)
-    user = await user_service.get_user_by_id(1)
+    user = await user_service.get_user_by_id(user_id)
     assert user == {"id": user_id, "name": "Alice"}
-    repo.get_user_by_id.assert_awaited_once_with(1)
+    repo.get_user_by_id.assert_awaited_once_with(user_id)
 
 
 @pytest.mark.anyio
