@@ -19,7 +19,7 @@ async def test_get_user_by_id_success():
 
 @pytest.mark.anyio
 async def test_get_user_by_id_not_found():
-    user_id = 999
+    user_id = 999  # non-existent user
     repo = AsyncMock()
     repo.get_user_by_id.side_effect = NotFoundException(detail=f"User with Id '{user_id}' not found")
 

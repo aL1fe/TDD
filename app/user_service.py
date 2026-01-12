@@ -1,4 +1,4 @@
-from app.user_repo import UserRepo
+from app.user_repo import InMamoryRepository, UserRepo
 
 
 class UserService:
@@ -13,4 +13,4 @@ class UserService:
 
 # Fabrice function for dependency injection
 def get_user_service() -> UserService:
-    return UserService(UserRepo())
+    return UserService(InMamoryRepository())
